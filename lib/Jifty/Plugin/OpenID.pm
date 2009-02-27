@@ -5,6 +5,8 @@ package Jifty::Plugin::OpenID;
 use base qw/Jifty::Plugin/;
 use LWPx::ParanoidAgent;
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 Jifty::Plugin::OpenID - Provides OpenID authentication for your jifty app
