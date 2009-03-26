@@ -5,7 +5,7 @@ package Jifty::Plugin::OpenID;
 use base qw/Jifty::Plugin/;
 use LWPx::ParanoidAgent;
 
-our $VERSION = '0.01';
+our $VERSION = '0.9';
 
 =head1 NAME
 
