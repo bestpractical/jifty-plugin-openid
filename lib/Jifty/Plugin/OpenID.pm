@@ -14,6 +14,76 @@ Jifty::Plugin::OpenID - Provides OpenID authentication for your jifty app
 
 Provides OpenID authentication for your app
 
+=head1 USAGE
+
+=head2 Config
+
+please provide C<OpenIDSecret> in your F<etc/config.yml> , the C<OpenIDUA> is
+B<optional> , OpenID Plugin will use L<LWPx::ParanoidAgent> by default.
+
+    --- 
+    application:
+        OpenIDSecret: 1234
+        OpenIDUA: LWP::UserAgent
+
+or you can set C<OpenIDUserAgent> environment var in command-line:
+
+    OpenIDUserAgent=LWP::UserAgent bin/jifty server
+
+if you are using L<LWPx::ParanoidAgent> as your openid agent. 
+you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your own OpenID server.
+
+    export JIFTY_OPENID_WHITELIST_HOST=123.123.123.123
+
+=head2 User Model
+
+create your User model , add a column named C<name> to the model.
+and let User model use L<Jifty::Plugin::OpenID::Mixin::Model::User>.
+
+    use TestApp::Record schema {
+
+        column name =>
+            type is 'varchar';
+
+    };
+    use Jifty::Plugin::OpenID::Mixin::Model::User;
+
+=head2 View
+
+OpenID plugin provides AuthenticateOpenID Action. so that you can render an
+AuthenticateOpenID in your template:
+
+    form {
+        my $openid = new_action( class   => 'AuthenticateOpenID',
+                                moniker => 'authenticateopenid' );
+        render_action( $openid );
+    };
+
+this action renders a form which provides openid url field.
+and you will need to provide a submit button in your form.  
+
+    form {
+        my $openid = new_action( class   => 'AuthenticateOpenID',
+                                moniker => 'authenticateopenid' );
+
+        # ....
+
+        render_action( $openid );
+        outs_raw(
+            Jifty->web->return(
+                to     => '/openid_verify_done',
+                label  => _("Login with OpenID"),
+                submit => $openid
+            ));
+    };
+
+the C<to> field is for verified user to redirect to.
+so that you will need to implement a template called C</openid_verify_done>:
+
+    template '/openid_verify_done' => page {
+        h1 { "Done" };
+    };
+
 =cut
 
 sub init {
