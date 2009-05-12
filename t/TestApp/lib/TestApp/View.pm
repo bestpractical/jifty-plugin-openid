@@ -6,12 +6,9 @@ use Jifty::View::Declare::Helpers;
 
 
 template '/' => page {
-
-
     form {
         my $openid = new_action( class   => 'AuthenticateOpenID',
                                 moniker => 'authenticateopenid' );
-
         div { { class is 'openid'};
             div { { id is 'openid-login' };
                 render_action( $openid );
@@ -24,15 +21,11 @@ template '/' => page {
             };
         };
     };
-
-
 };
 
 
 template '/openid_verify_done' => page {
-
     h1 { "Done" };
-
 };
 
 

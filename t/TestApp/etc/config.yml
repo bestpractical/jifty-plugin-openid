@@ -1,6 +1,7 @@
 --- 
 application:
   OpenIDSecret: 1234
+  OpenIDUA: LWP::UserAgent
 framework: 
   AdminMode: 1
   ApplicationClass: TestApp
