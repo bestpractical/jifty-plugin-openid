@@ -6,6 +6,7 @@ use Jifty::View::Declare::Helpers;
 
 
 template '/' => page {
+    with ( name => 'openid-form' ),
     form {
         my $openid = new_action( class   => 'AuthenticateOpenID',
                                 moniker => 'authenticateopenid' );

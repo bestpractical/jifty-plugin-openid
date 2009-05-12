@@ -60,7 +60,7 @@ template 'openid/create' => page {
             )
         );
     };
-    Jifty->web->form->start( call => $next );
+    Jifty->web->form->start( call => $next , name => 'openid-user-create' );
     render_action($action);
     form_submit( label => _('Continue'), submit => $action );
     Jifty->web->form->end;
