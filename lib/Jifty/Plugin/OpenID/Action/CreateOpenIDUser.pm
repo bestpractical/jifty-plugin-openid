@@ -3,7 +3,7 @@ use warnings;
 
 =head1 NAME
 
-Jifty::Plugin::OpenID::Action::CreateOpenIDUser - create 0penId user
+Jifty::Plugin::OpenID::Action::CreateOpenIDUser - Create OpenID user
 
 =cut
 

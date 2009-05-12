@@ -37,16 +37,27 @@ you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your own OpenID serv
 
 =head2 User Model
 
-create your User model , add a column named C<name> to the model.
-and let User model use L<Jifty::Plugin::OpenID::Mixin::Model::User>.
+OpenID plugin calls UserModel->brief_description to get a meaningful value of
+an unique id of an user record
+
+so create your user model , add a C<name> method named to return the readable
+user identity. and let User model use
+L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
 
     use TestApp::Record schema {
 
-        column name =>
+        column email =>
             type is 'varchar';
 
     };
     use Jifty::Plugin::OpenID::Mixin::Model::User;
+
+    sub name {
+        my $self = shift;
+        return $self->email;
+    }
+
+See L<Jifty::Record> for C<brief_description> method.
 
 =head2 View
 

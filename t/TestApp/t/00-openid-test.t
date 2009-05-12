@@ -37,14 +37,15 @@ $mech->content_contains( 'Set your username' );
 
 # match this name="J:A:F-name-auto-86d3fcd1a158d85fd2e6165fc00113c7-1"
 my $content = $mech->content();
-my ($field_name) = ($content =~ m[name="(J:A:F-name-auto-\w+-\d)"]gsm);
+my ($field_name) = ($content =~ m[name="(J:A:F-email-auto-\w+-\d)"]gsm);
 
 diag $field_name;
 
 $mech->submit_form(
     form_name => 'openid-user-create',
     fields    => { 
-        $field_name  => 'c9s'
+        # $field_name  => 'c9s'
+        $field_name  => 'c9s@c9s'
     },
     # button    => 'Continue'
 ); 
@@ -54,8 +55,8 @@ $mech->content_contains( 'Welcome' );
 
 
 my $u = TestApp::Model::User->new;
-$u->load_by_cols( name => 'c9s' );
+$u->load_by_cols( email => 'c9s@c9s' );
 
 ok( $u->id , 'found user' );
-is( $u->name , 'c9s' , 'found openid register user' );
+is( $u->email , 'c9s@c9s' , 'found openid register user' );
 is( $u->openid , $openid , 'match openid' );
