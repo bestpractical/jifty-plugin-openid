@@ -39,6 +39,7 @@ you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your own OpenID serv
 
 Create your user model , and let it uses
 L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
+and a C<name> method.
 
     use TestApp::Record schema {
 
@@ -48,10 +49,15 @@ L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
     };
     use Jifty::Plugin::OpenID::Mixin::Model::User;
 
-Note: if you are using SkeletonApp Plugin , you might need to declare a C<name>
-method. because C<salutation> template in SkeletonApp uses
-current_user->username , which calls C<brief_description> method.  See
-L<Jifty::Record> for C<brief_description> method.
+    sub name {
+        my $self = shift;
+        return $self->email;
+    }
+
+Note: you might need to declare a C<name> method. because the OpenID
+CreateOpenIDUser action and SkeletonApp needs current_user-E<>>username to show
+welcome message and success message , which calls C<brief_description> method.
+See L<Jifty::Record> for C<brief_description> method.
 
 =head2 View
 
