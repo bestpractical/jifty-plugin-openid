@@ -13,5 +13,10 @@ column email =>
 
 use Jifty::Plugin::OpenID::Mixin::Model::User;
 
+sub name {
+    my $self = shift;
+    return $self->email;
+}
+
 1;
 

@@ -50,7 +50,6 @@ $mech->submit_form(
     # button    => 'Continue'
 ); 
 
-
 $mech->content_contains( 'Welcome' );
 
 

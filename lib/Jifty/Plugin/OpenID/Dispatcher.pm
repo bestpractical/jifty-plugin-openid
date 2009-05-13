@@ -82,7 +82,9 @@ on 'openid/verify_and_login' => run {
             Jifty->log->info("got openid: $openid");
             my $nick = get('openid.sreg.nickname');
             if ( $nick ) {
-                redirect( Jifty::Web::Form::Clickable->new( url => '/openid/create', parameters => { nickname => $nick, openid => $openid } ));
+                redirect( Jifty::Web::Form::Clickable->new( url => '/openid/create', parameters => { 
+                    nickname => $nick, 
+                    openid => $openid } ));
             }
             else {
                 redirect( Jifty::Web::Form::Clickable->new( url => '/openid/create' ) );
