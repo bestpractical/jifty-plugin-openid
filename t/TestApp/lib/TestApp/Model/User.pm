@@ -13,13 +13,5 @@ column email =>
 
 use Jifty::Plugin::OpenID::Mixin::Model::User;
 
-# Your model-specific methods go here.
-
-# Openid Plugin use brief_description to get an user identity.
-sub name {
-    my $self = shift;
-    $self->email;
-}
-
 1;
 
