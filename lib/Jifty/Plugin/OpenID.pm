@@ -37,11 +37,7 @@ you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your own OpenID serv
 
 =head2 User Model
 
-OpenID plugin calls UserModel->brief_description to get a meaningful value of
-an unique id of an user record
-
-so create your user model , add a C<name> method named to return the readable
-user identity. and let User model use
+Create your user model , and let it uses
 L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
 
     use TestApp::Record schema {
@@ -52,12 +48,10 @@ L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
     };
     use Jifty::Plugin::OpenID::Mixin::Model::User;
 
-    sub name {
-        my $self = shift;
-        return $self->email;
-    }
-
-See L<Jifty::Record> for C<brief_description> method.
+Note: if you are using SkeletonApp Plugin , you might need to declare a C<name>
+method. because C<salutation> template in SkeletonApp uses
+current_user->username , which calls C<brief_description> method.  See
+L<Jifty::Record> for C<brief_description> method.
 
 =head2 View
 
