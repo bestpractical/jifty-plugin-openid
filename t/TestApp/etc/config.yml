@@ -33,7 +33,7 @@ framework:
     - LetMe: {}
     - OnlineDocs: {}
     - REST: {}
-    - SkeletonApp: {}
+#    - SkeletonApp: {}
     - OpenID: {}
 
   PubSub: 
