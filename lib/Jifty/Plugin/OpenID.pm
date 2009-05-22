@@ -114,6 +114,9 @@ sub new_ua {
     my $class = shift;
     my $ua;
     my $ua_class = $class->get_ua_class;
+
+    Jifty->log->info( "OpenID Plugin is using $ua_class as UserAgent" );
+
     if( $ua_class eq 'LWPx::ParanoidAgent' ) {
          $ua = LWPx::ParanoidAgent->new(
                         whitelisted_hosts => [ $ENV{JIFTY_OPENID_WHITELIST_HOST} ]
