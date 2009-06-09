@@ -55,7 +55,7 @@ and a C<name> method.
     }
 
 Note: you might need to declare a C<name> method. because the OpenID
-CreateOpenIDUser action and SkeletonApp needs current_user-E<>>username to show
+CreateOpenIDUser action and SkeletonApp needs current_user->username to show
 welcome message and success message , which calls C<brief_description> method.
 See L<Jifty::Record> for C<brief_description> method.
 
@@ -139,5 +139,17 @@ sub get_csr {
         @_,
     );
 }
+
+=head1 AUTHORS
+
+Alex Vandiver, Cornelius  <cornelius.howl {at} gmail.com >
+
+=head1 LICENSE
+
+Copyright 2005-2009 Best Practical Solutions, LLC.
+
+This program is free software and may be modified and distributed under the same terms as Perl itself.
+
+=cut
 
 1;

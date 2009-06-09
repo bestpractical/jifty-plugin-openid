@@ -1,6 +1,6 @@
-use inc::Module::Install 0.46;
+use inc::Module::Install;
 name('Jifty-Plugin-OpenID');
-version_from('lib/Jifty/Plugin/OpenID.pm');
+all_from('lib/Jifty/Plugin/OpenID.pm');
 
 requires('Jifty');
 requires('Net::OpenID::Consumer');
