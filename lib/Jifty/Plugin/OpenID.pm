@@ -4,7 +4,7 @@ use warnings;
 package Jifty::Plugin::OpenID;
 use base qw/Jifty::Plugin/;
 
-our $VERSION = '0.10';
+our $VERSION = '1.00';
 
 =head1 NAME
 
