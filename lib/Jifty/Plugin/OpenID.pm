@@ -18,7 +18,9 @@ Provides OpenID authentication for your app
 
 =head2 Config
 
-please provide C<OpenIDSecret> in your F<etc/config.yml> , the C<OpenIDUA> is
+First add the C<OpenID> plugin to the list of plugins in F<etc/config.yml>.
+
+Please provide C<OpenIDSecret> in your F<etc/config.yml> , the C<OpenIDUA> is
 B<optional> , OpenID Plugin will use L<LWPx::ParanoidAgent> by default.
 
     --- 
