@@ -7,7 +7,7 @@ framework:
   ApplicationClass: TestApp
   ApplicationName: TestApp
   ApplicationUUID: B2B2509E-3EC4-11DE-A47C-73233554FF8D
-  ConfigFileVersion: 4
+  ConfigFileVersion: 5
   Database: 
     AutoUpgrade: 1
     CheckSchema: 1
