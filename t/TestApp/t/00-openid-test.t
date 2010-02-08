@@ -1,12 +1,15 @@
 #!/usr/bin/env perl
-use Jifty::Test tests => 12;
+use Jifty::Test tests => 12, actual_server => 1;
 use strict;
 use warnings;
 use Jifty::Test::WWW::Mechanize;
 
-
-
 use Test::OpenID::Server;
+my $server = Jifty::Test->make_server;
+isa_ok( $server, 'Jifty::Server' );
+my $URL = $server->started_ok;
+my $mech = Jifty::Test::WWW::Mechanize->new;
+
 my $test_openid_server   = Test::OpenID::Server->new;
 my $test_openid_url = $test_openid_server->started_ok("server started ok");
 
@@ -14,11 +17,6 @@ diag $test_openid_url;
 
 my $openid = "$test_openid_url/c9s";
 
-
-my $server = Jifty::Test->make_server;
-isa_ok( $server, 'Jifty::Server' );
-my $URL = $server->started_ok;
-my $mech = Jifty::Test::WWW::Mechanize->new;
 $mech->get_ok( $URL . '/' , "get mainpage" );
 $mech->content_contains( 'Login with OpenID' );
 $mech->content_contains( 'OpenID URL' );
