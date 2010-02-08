@@ -136,7 +136,7 @@ sub get_csr {
     return Net::OpenID::Consumer->new(
         ua              => $class->new_ua ,
         cache           => Cache::FileCache->new,
-        args            => scalar Jifty->handler->cgi->Vars,
+        args            => Jifty->web->request->parameters,
         consumer_secret => Jifty->config->app('OpenIDSecret'),
         @_,
     );

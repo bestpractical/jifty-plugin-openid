@@ -34,9 +34,10 @@ sub take_action {
 # XXX HACK: some OpenID servers (LJ and myopenid.com included) don't seem
 # to properly escape plus signs (+) in openid.sig when returning the user
 # back to us.  We need to convert the pluses back from spaces to pluses again.
-    my $sig = Jifty->handler->cgi->param('openid.sig');
+    my $parameters = Jifty->web->request->parameters;
+    my $sig        = $parameters->{'openid.sig'};
     $sig =~ s/ /+/g;
-    Jifty->handler->cgi->param( 'openid.sig' => $sig );
+    $parameters->{'openid.sig'} = $sig;
 
     my $csr = Jifty::Plugin::OpenID->get_csr;
 
