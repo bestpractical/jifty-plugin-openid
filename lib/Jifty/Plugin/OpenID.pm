@@ -20,6 +20,13 @@ Provides OpenID authentication for your app
 
 First add the C<OpenID> plugin to the list of plugins in F<etc/config.yml>.
 
+    --- 
+    framework:
+        ...
+        Plugins:
+            ...
+            - OpenID: {}
+
 Please provide C<OpenIDSecret> in your F<etc/config.yml> , the C<OpenIDUA> is
 B<optional> , OpenID Plugin will use L<LWPx::ParanoidAgent> by default.
 
@@ -32,38 +39,40 @@ or you can set C<OpenIDUserAgent> environment var in command-line:
 
     OpenIDUserAgent=LWP::UserAgent bin/jifty server
 
-if you are using L<LWPx::ParanoidAgent> as your openid agent. 
-you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your own OpenID server.
+If you are using L<LWPx::ParanoidAgent> as your openid agent,
+you will need to provide C<JIFTY_OPENID_WHITELIST_HOST> for your
+own OpenID server.
 
     export JIFTY_OPENID_WHITELIST_HOST=123.123.123.123
 
 =head2 User Model
 
-Create your user model , and let it uses
-L<Jifty::Plugin::OpenID::Mixin::Model::User> to mixin "openid" column.
-and a C<name> method.
+Create your user model:
 
+    jifty model --name User
+
+Mixin openid column using 
+L<Jifty::Plugin::OpenID::Mixin::Model::User>:
+
+    package TestApp::Model::User;
+    ...
     use TestApp::Record schema {
-
-        column email =>
-            type is 'varchar';
-
+        ...
     };
     use Jifty::Plugin::OpenID::Mixin::Model::User;
 
-    sub name {
-        my $self = shift;
-        return $self->email;
-    }
+Note: you might need to declare a C<brief_description> method that is
+used to show welcome message and success message containing user's "name".
+See L<Jifty::Record/brief_description> method. For example:
 
-Note: you might need to declare a C<name> method. because the OpenID
-CreateOpenIDUser action and SkeletonApp needs current_user->username to show
-welcome message and success message , which calls C<brief_description> method.
-See L<Jifty::Record> for C<brief_description> method.
+    sub brief_description {
+        my $self = shift;
+        return $self->openid;
+    }
 
 =head2 View
 
-OpenID plugin provides AuthenticateOpenID Action. so that you can render an
+OpenID plugin provides C<AuthenticateOpenID> action. so that you can render an
 AuthenticateOpenID in your template:
 
     form {
