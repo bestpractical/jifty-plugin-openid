@@ -67,8 +67,10 @@ OpenID plugin provides AuthenticateOpenID Action. so that you can render an
 AuthenticateOpenID in your template:
 
     form {
-        my $openid = new_action( class   => 'AuthenticateOpenID',
-                                moniker => 'authenticateopenid' );
+        my $openid = new_action(
+            class   => 'AuthenticateOpenID',
+            moniker => 'authenticateopenid',
+        );
         render_action( $openid );
     };
 
@@ -76,8 +78,10 @@ this action renders a form which provides openid url field.
 and you will need to provide a submit button in your form.  
 
     form {
-        my $openid = new_action( class   => 'AuthenticateOpenID',
-                                moniker => 'authenticateopenid' );
+        my $openid = new_action(
+            class   => 'AuthenticateOpenID',
+            moniker => 'authenticateopenid',
+        );
 
         # ....
 
@@ -87,7 +91,8 @@ and you will need to provide a submit button in your form.
                 to     => '/openid_verify_done',
                 label  => _("Login with OpenID"),
                 submit => $openid
-            ));
+            );
+        );
     };
 
 the C<to> field is for verified user to redirect to.
